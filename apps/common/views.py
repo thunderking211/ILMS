@@ -7,14 +7,24 @@ from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 from apps.userprofile.models import Profile
+from django.core.mail import send_mail
+from .forms import ContactForm
+from django.http import HttpResponseRedirect
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
+from .forms import UserForm, ProfileForm
+from django.contrib.auth.models import User
+from apps.userprofile.models import Profile
+from django.shortcuts import redirect
 
+from django.contrib import messages
 class HomeView(TemplateView):
     template_name = 'common/home.html'
 
 class DashboardView(LoginRequiredMixin, TemplateView):
     template_name = 'common/dashboard.html'
     login_url = reverse_lazy('home')
-
+   
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
@@ -28,14 +38,7 @@ class SignUpView(CreateView):
     success_url = reverse_lazy('home')
     template_name = 'common/register.html'
 
-from django.http import HttpResponseRedirect
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse_lazy
-from .forms import UserForm, ProfileForm
-from django.contrib.auth.models import User
-from apps.userprofile.models import Profile
 
-from django.contrib import messages
 
 class ProfileView(LoginRequiredMixin, TemplateView):
     template_name = 'common/profile.html'
@@ -70,11 +73,39 @@ class ProfileUpdateView(LoginRequiredMixin, TemplateView):
         return self.post(request, *args, **kwargs)
 
 def emi(request):
-    return render(request, '/home/kevin/Desktop/sem8/Django-LMS-Project-master/templates/emi.html')
+    return render(request, 'common/emi.html')
 
 def loan(request):
-    return render(request, '/home/kevin/Desktop/sem8/Django-LMS-Project-master/templates/common/loan.html')
+    return render(request, 'common/loan.html')
 
 
-def contact_us(request):
-    return render(request, '/home/kevin/Desktop/sem8/Django-LMS-Project-master/templates/contact_us.html')
+def contact(request):
+	if request.method == 'POST':
+		form = ContactForm(request.POST)
+		if form.is_valid():
+			subject = "Website Inquiry" 
+			body = {
+			'first_name': form.cleaned_data['first_name'], 
+			'last_name': form.cleaned_data['last_name'], 
+			'email': form.cleaned_data['email_address'], 
+			'message':form.cleaned_data['message'], 
+			}
+			message = "\n".join(body.values())
+            
+			try:
+				print(request.user.email,"\n\n\n\n\n\n")
+				send_mail(subject, message, request.user.email, ['kevinpandya18@gnu.ac.in']) 
+			except BadHeaderError:
+				return HttpResponse('Invalid header found.')
+			return redirect ("contact_us")
+      
+	form = ContactForm()
+	return render(request, "common/contact_us.html", {'form':form})
+import socket
+## getting the hostname by socket.gethostname() method
+hostname = socket.gethostname()
+## getting the IP address using socket.gethostbyname() method
+ip_address = socket.gethostbyname(hostname)
+## printing the hostname and ip_address
+print(f"Hostname: {hostname}")
+print(f"IP Address: {ip_address}")

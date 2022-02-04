@@ -11,7 +11,7 @@ class Profile(models.Model):
     profile_image = models.ImageField(default='default-avatar.png', upload_to='users/', null=True, blank=True)
 
     def __str__(self):
-        return '%s %s' % (self.user.first_name, self.user.last_name)
+        return '%s %s' % (self.user.first_name  , self.user.last_name)
 
 
 @receiver(post_save, sender=User)
@@ -23,3 +23,14 @@ def create_user_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
+
+class contact(models.Model):
+    first_name = User.first_name
+    last_name = models.CharField(max_length = 50)
+    email_address = models.EmailField(max_length = 150)
+
+    def __str__(self):
+        return '%s %s' % (self.user.first_name, self.user.last_name ,self.user.email)
+
+
+

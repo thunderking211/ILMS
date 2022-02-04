@@ -1,5 +1,3 @@
-# ILMS
-Intelligent Loan Management System
 
 ### Setup
 1. Create a folder and put all the files inside it.
@@ -8,3 +6,4 @@ Intelligent Loan Management System
 4. Run requirements.txt - `pip install -r requirements.txt`
 5. Run the Application - `python manage.py runserver`
 6. Migrate
+

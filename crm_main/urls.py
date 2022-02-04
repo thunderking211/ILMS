@@ -6,7 +6,7 @@ from apps.common.views import HomeView, SignUpView, DashboardView, ProfileUpdate
 
 from django.contrib.auth import views as auth_views
 
-from apps.common.views import emi, loan, contact_us
+from apps.common.views import emi, loan, contact
 urlpatterns = [
     path('admin/', admin.site.urls),
     
@@ -18,7 +18,7 @@ urlpatterns = [
     path('emi/', emi ,name='emi'),
     path('loan/', loan ,name='loan'),
     
-    path('contact_us/', contact_us ,name='contact_us'),
+    path('contact_us/', contact ,name='contact_us'),
     # Authentication 
     path('register/', SignUpView.as_view(), name="register"),
 
