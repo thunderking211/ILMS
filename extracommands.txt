@@ -1,0 +1,7 @@
+# To be used when the you see CRLF instead of LF at the bottom right of VSCode.
+# Just copy paste the below lines in terminal and hit enter
+
+for file in *.*
+do
+    vi +':w ++ff=unix' +':q' "$file"
+done

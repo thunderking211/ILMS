@@ -14,22 +14,22 @@ class SignUpForm(UserCreationForm):
     class Meta:
         model = User
         fields = [
-            'username', 
-            'first_name', 
-            'last_name', 
-            'email', 
-            'password1', 
-            'password2', 
+            'username',
+            'first_name',
+            'last_name',
+            'email',
+            'password1',
+            'password2',
         ]
 
 class UserForm(forms.ModelForm):
     class Meta:
         model = User
         fields = [
-            'username', 
-            'first_name', 
-            'last_name', 
-            'email', 
+            'username',
+            'first_name',
+            'last_name',
+            'email',
         ]
 
 class ProfileForm(forms.ModelForm):
@@ -43,7 +43,7 @@ class ProfileForm(forms.ModelForm):
         ]
 
 
-class ContactForm(forms.Form):  
+class ContactForm(forms.Form):
 	first_name = forms.CharField(max_length = 50)
 	last_name = forms.CharField(max_length = 50)
 	email_address = forms.EmailField(max_length = 150)
