@@ -24,7 +24,7 @@ class HomeView(TemplateView):
 class DashboardView(LoginRequiredMixin, TemplateView):
     template_name = 'common/dashboard.html'
     login_url = reverse_lazy('home')
-   
+
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
@@ -67,7 +67,7 @@ class ProfileUpdateView(LoginRequiredMixin, TemplateView):
                                         profile_form=profile_form
                                     )
 
-        return self.render_to_response(context)     
+        return self.render_to_response(context)
 
     def get(self, request, *args, **kwargs):
         return self.post(request, *args, **kwargs)
@@ -83,22 +83,22 @@ def contact(request):
 	if request.method == 'POST':
 		form = ContactForm(request.POST)
 		if form.is_valid():
-			subject = "Website Inquiry" 
+			subject = "Website Inquiry"
 			body = {
-			'first_name': form.cleaned_data['first_name'], 
-			'last_name': form.cleaned_data['last_name'], 
-			'email': form.cleaned_data['email_address'], 
-			'message':form.cleaned_data['message'], 
+			'first_name': form.cleaned_data['first_name'],
+			'last_name': form.cleaned_data['last_name'],
+			'email': form.cleaned_data['email_address'],
+			'message':form.cleaned_data['message'],
 			}
 			message = "\n".join(body.values())
-            
+
 			try:
 				print(request.user.email,"\n\n\n\n\n\n")
-				send_mail(subject, message, request.user.email, ['kevinpandya18@gnu.ac.in']) 
+				send_mail(subject, message, request.user.email, ['kevinpandya18@gnu.ac.in'])
 			except BadHeaderError:
 				return HttpResponse('Invalid header found.')
 			return redirect ("contact_us")
-      
+
 	form = ContactForm()
 	return render(request, "common/contact_us.html", {'form':form})
 import socket

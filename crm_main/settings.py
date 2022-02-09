@@ -63,7 +63,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
-    'social_django.middleware.SocialAuthExceptionMiddleware', 
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'crm_main.urls'
@@ -122,7 +122,7 @@ DATABASES = {
             'USER': '',
             'PASSWORD': '',
             'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-            'PORT': '',  
+            'PORT': '',
         }
     }
 # Internationalization
@@ -144,9 +144,9 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (     
-os.path.join(BASE_DIR, 'static'), 
-) 
+STATICFILES_DIRS = (
+os.path.join(BASE_DIR, 'static'),
+)
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Media Files
