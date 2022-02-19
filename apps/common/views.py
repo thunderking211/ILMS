@@ -1,3 +1,5 @@
+from multiprocessing import context
+from urllib import request
 from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
@@ -6,7 +8,7 @@ from .forms import SignUpForm, UserForm, ProfileForm
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.contrib import messages
-from apps.userprofile.models import Profile
+from apps.userprofile.models import Profile, homeloan, carloan, personalloan
 from django.core.mail import send_mail
 from .forms import ContactForm
 from django.http import HttpResponseRedirect
@@ -17,14 +19,18 @@ from django.contrib.auth.models import User
 from apps.userprofile.models import Profile
 from django.shortcuts import redirect
 
+from django.shortcuts import render
+from apps.common.forms import homeloanForm, carloanForm, personalloanForm
+ 
 from django.contrib import messages
+
 class HomeView(TemplateView):
     template_name = 'common/home.html'
 
 class DashboardView(LoginRequiredMixin, TemplateView):
     template_name = 'common/dashboard.html'
+   
     login_url = reverse_lazy('home')
-
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
@@ -35,7 +41,7 @@ class DashboardView(LoginRequiredMixin, TemplateView):
 
 class SignUpView(CreateView):
     form_class = SignUpForm
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('login')
     template_name = 'common/register.html'
 
 
@@ -67,7 +73,7 @@ class ProfileUpdateView(LoginRequiredMixin, TemplateView):
                                         profile_form=profile_form
                                     )
 
-        return self.render_to_response(context)
+        return self.render_to_response(context)     
 
     def get(self, request, *args, **kwargs):
         return self.post(request, *args, **kwargs)
@@ -83,22 +89,22 @@ def contact(request):
 	if request.method == 'POST':
 		form = ContactForm(request.POST)
 		if form.is_valid():
-			subject = "Website Inquiry"
+			subject = "Website Inquiry" 
 			body = {
-			'first_name': form.cleaned_data['first_name'],
-			'last_name': form.cleaned_data['last_name'],
-			'email': form.cleaned_data['email_address'],
-			'message':form.cleaned_data['message'],
+			'first_name': form.cleaned_data['first_name'], 
+			'last_name': form.cleaned_data['last_name'], 
+			'email': form.cleaned_data['email_address'], 
+			'message':form.cleaned_data['message'], 
 			}
 			message = "\n".join(body.values())
-
+            
 			try:
 				print(request.user.email,"\n\n\n\n\n\n")
-				send_mail(subject, message, request.user.email, ['kevinpandya18@gnu.ac.in'])
+				send_mail(subject, message, request.user.email, ['kevinpandya18@gnu.ac.in']) 
 			except BadHeaderError:
 				return HttpResponse('Invalid header found.')
 			return redirect ("contact_us")
-
+      
 	form = ContactForm()
 	return render(request, "common/contact_us.html", {'form':form})
 import socket
@@ -109,3 +115,36 @@ ip_address = socket.gethostbyname(hostname)
 ## printing the hostname and ip_address
 print(f"Hostname: {hostname}")
 print(f"IP Address: {ip_address}")
+
+def homeloanshowform(request):
+    form= homeloanForm(request.POST or None)
+    print(request.POST,"\n\nhome lone")
+    if form.is_valid():
+        form.save()
+    else:
+        print("not validate")
+    context= {'form': form }
+    
+    return render(request, 'common/apply.html', context)
+    
+def carloanshowform(request):
+    form= carloanForm(request.POST or None)
+    print(request.POST,"\n\n car lone")
+    if form.is_valid():
+        form.save()
+    else:
+        print("not validate")
+    context= {'form': form }
+    
+    return render(request, 'common/apply.html', context)
+
+def personalloanshowform(request):
+    form= personalloanForm(request.POST or None)
+    print(request.POST,"\n\n personal lone")
+    if form.is_valid():
+        form.save()
+    else:
+        print("not validate")
+    context= {'form': form }
+    
+    return render(request, 'common/apply.html', context)

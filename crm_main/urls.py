@@ -1,15 +1,16 @@
+import email
 from django.contrib import admin
 from django.urls import path, include
-
+from django.template.loader import render_to_string
 
 from apps.common.views import HomeView, SignUpView, DashboardView, ProfileUpdateView, ProfileView
 
 from django.contrib.auth import views as auth_views
 
-from apps.common.views import emi, loan, contact
+from apps.common.views import emi, loan, contact, homeloanshowform, carloanshowform, personalloanshowform
 urlpatterns = [
     path('admin/', admin.site.urls),
-
+    
     path('', HomeView.as_view(), name='home'),
     path('dashboard/', DashboardView.as_view(), name='dashboard'),
 
@@ -17,9 +18,11 @@ urlpatterns = [
     path('profile/', ProfileView.as_view(), name='profile'),
     path('emi/', emi ,name='emi'),
     path('loan/', loan ,name='loan'),
-
+    path('homeloanshowform/', homeloanshowform ,name='homeloanshowform'),
+    path('carloanshowform/', carloanshowform ,name='carloanshowform'),
+    path('personalloanshowform/', personalloanshowform ,name='personalloanshowform'),
     path('contact_us/', contact ,name='contact_us'),
-    # Authentication
+    # Authentication 
     path('register/', SignUpView.as_view(), name="register"),
 
     path('login/', auth_views.LoginView.as_view(
@@ -49,6 +52,7 @@ urlpatterns = [
              template_name='common/password-reset/password_reset.html',
              subject_template_name='common/password-reset/password_reset_subject.txt',
              email_template_name='common/password-reset/password_reset_email.html',
+             
              # success_url='/login/'
          ),
          name='password_reset'),
