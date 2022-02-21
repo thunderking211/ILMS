@@ -1,5 +1,5 @@
 {% load static %}
-{% load crispy_forms_tags %} 
+{% load crispy_forms_tags %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -20,7 +20,7 @@
 
   <link href="/static/css/sb-admin-2.min.css" rel="stylesheet">
  <!-- Date Time Picker CSS -->
-  
+
   <!-- Date Time Picker CSS -->
   <style>#outer{width:90%;max-width:600px;background:#fff;margin:0 auto}
     #cover{border:2px solid #111;padding:15px 0}
@@ -41,7 +41,7 @@
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
         <div class="sidebar-brand-icon">
-         
+
           <img src="/static/img/logo_image.png" class="rounded" style="height: 101%; width: 150%;" alt="Cinque Terre">
         </div>
         <div class="sidebar-brand-text ml-5"> Loan<sup> Management</sup><sup> System</sup></div>
@@ -138,20 +138,22 @@
     <div class="d-sm-flex align-items-center justify-content-between mb-4 mt-4">
     <h1 class="h3 mb-0 text-gray-800">  EMI Calculator</h1>
     <span id='date-time' class="small"></span>
-    </div>          
+    </div>
 
     <!-- Main Content Here -->
     <div class="card o-hidden border-0 shadow-lg my-5">
       <div class="card-body p-0">
         <div class="row">
-          <div class="col-lg-3"></div>
+          <div class="col-lg-6">
+            <img src="{% static 'img/emi.jpg' %}" class="rounded w-100" style="margin-top: 10%;"  alt="Contact_us_image">
+          </div>
           <div class="col-lg-6">
             <div class="p-5">
               <div class="text-center">
                 <h1 class="h4 text-gray-900 mb-4">EMI Calculator!</h1>
               </div>
               <p class="small">
-                Please write your Loan Amount, Repayment in months and Interest Rate and get to know what will be your EMI, Interest payable and Total payable amount.   
+                Please write your Loan Amount, Repayment in months and Interest Rate and get to know what will be your EMI, Interest payable and Total payable amount.
             </p>
               <form class="card-body">
                 <table class=main>
@@ -177,7 +179,6 @@
                                           <input class="form-control" type="number" placeholder="Interest" aria-label="Interest example"   id="tintt1" disabled><tr>
                                             <td>Total payable<td>
                                               <input class="form-control" type="number" placeholder="EMI" aria-label="EMi example"    id="gt1" disabled><tr></tr>
-                                              
                                             </table>
                                           </form>
               <hr>
@@ -186,14 +187,14 @@
         </div>
       </div>
     </div>
-    
-    
-    
+
+
+
 </div>
-       
+
          {% endblock content %}
          <div id="content"></div>
-           
+
       </div>
       <!-- End of Main Content -->
 
@@ -203,10 +204,10 @@
   </div>
   <!-- End of Page Wrapper -->
 
- 
+
   <!-- Bootstrap core JavaScript-->
-  
-  
+
+
   <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 
@@ -231,7 +232,7 @@ new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_el
 </script>
 <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
-  
+
 </body>
 
 </html>

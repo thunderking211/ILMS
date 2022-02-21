@@ -13,7 +13,7 @@ git config credential.helper cache
 git remote update
 git pull --rebase
 
-## If you already have both repo and git set 
+## If you already have both repo and git set
 git remote update
 git pull --rebase
 

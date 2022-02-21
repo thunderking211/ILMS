@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+from datetime import timedelta
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -37,12 +38,15 @@ DEFAULT_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
 ]
 
 THIRD_PARTY_APPS = [
     'crispy_forms',
     'django_cleanup',
     'social_django',
+    # For Login Failure Limit Setting
+    'axes',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -64,6 +68,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
     'social_django.middleware.SocialAuthExceptionMiddleware',
+    'axes.middleware.AxesMiddleware',
 ]
 
 ROOT_URLCONF = 'crm_main.urls'
@@ -88,6 +93,7 @@ TEMPLATES = [
 ]
 
 AUTHENTICATION_BACKENDS = (
+    'axes.backends.AxesBackend',
     'social_core.backends.facebook.FacebookOAuth2',
     'social_core.backends.twitter.TwitterOAuth',
     'social_core.backends.github.GithubOAuth2',
@@ -180,3 +186,13 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'kevinpandya18@gnu.ac.in'
 EMAIL_HOST_PASSWORD = 'KEVIN@1999'
 EMAIL_PORT = 587
+
+AXES_ENABLED = True
+
+AXES_FAILURE_LIMIT = 5
+
+AXES_COOLOFF_TIME = timedelta(minutes=30)
+
+AXES_ONLY_USER_FAILURES = True
+
+# AXES_LOCKOUT_TEMPLATE = 'template name'
