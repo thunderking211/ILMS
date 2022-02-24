@@ -1,0 +1,41 @@
+{% extends 'loan/adminbase.html' %}
+{% block content %}
+{%load static%}
+
+<head>
+  <link href="http://netdna.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+ <!-- Begin Page Content -->
+ <div class="container-fluid">
+
+  <!-- Page Heading -->
+  <div class="d-sm-flex align-items-center justify-content-between mb-4 mt-4">
+  <h1 class="h3 mb-0 text-gray-800">Profile</h1>
+  </div>          
+
+  <!-- Main Content Here -->
+  <div class="row">
+    <div class="col-lg-2"></div>
+    {% for t in customers %}
+    <div class="col-lg-3 my-5">
+      <img src="{% static t.profile_pic.url %}" alt="Profile Pic" height="300px" width="300px"/>
+    </div>
+    <div class="card o-hidden border-0 shadow-lg my-5 col-lg-5 ">
+    
+      <div class="card-body shadow-lg">
+          <h2> Profile Of Customer </h2>
+          <p class="mt-5 mb-5"><strong>Full Name:</strong> {{t.get_name}} </p>
+          <p class="mt-5 mb-5"><strong>Phone Number: </strong> {{t.mobile}}  </p>
+          <p class="mt-5"> <strong>Address: </strong> {{t.address}}</p>
+          {% endfor %}
+      </div>
+    </div>
+  </div>
+  
+  
+  
+</div>
+{% endblock content %}
