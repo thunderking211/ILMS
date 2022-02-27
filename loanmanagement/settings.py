@@ -60,6 +60,7 @@ MIDDLEWARE = [
 
 AUTHENTICATION_BACKENDS = (
     'axes.backends.AxesBackend',
+    'django.contrib.auth.backends.ModelBackend',
 )
 
 ROOT_URLCONF = 'loanmanagement.urls'
@@ -170,7 +171,7 @@ AXES_ENABLED = True
 
 AXES_FAILURE_LIMIT = 5
 
-AXES_COOLOFF_TIME = timedelta(minutes=30)
+AXES_COOLOFF_TIME = timedelta(minutes=3)
 
 AXES_ONLY_USER_FAILURES = True
 
