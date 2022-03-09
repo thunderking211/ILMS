@@ -10,14 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
-from datetime import timedelta
-import os
 
+import os
+from datetime import timedelta
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-TEMPLATE_DIR = os.path.join(BASE_DIR,'templates')
-STATIC_DIR=os.path.join(BASE_DIR,'static')
-MEDIA_ROOT=os.path.join(BASE_DIR,'static')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
@@ -30,7 +27,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+)
 # Application definition
 
 INSTALLED_APPS = [
@@ -64,11 +65,12 @@ AUTHENTICATION_BACKENDS = (
 )
 
 ROOT_URLCONF = 'loanmanagement.urls'
+TEMPLATE_DIR = os.path.join(BASE_DIR,'templates')
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [TEMPLATE_DIR,],
+        'DIRS': ["templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -85,19 +87,24 @@ WSGI_APPLICATION = 'loanmanagement.wsgi.application'
 
 
 # Database
-# https://docs.djangoproject.com/en/3.0/ref/settings/#databases
+# https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-            'USER': '',
-            'PASSWORD': '',
-            'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-            'PORT': '',
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
+
+DATABASES = {'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'kevindb',
+            'USER': 'kevin',
+            'PASSWORD': 'kevin123',
+            'HOST': 'kevin-db.cfrbrd29yd94.us-east-1.rds.amazonaws.com',
+            'PORT': '3306',
+           }
         }
-    }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -132,16 +139,25 @@ USE_L10N = True
 USE_TZ = True
 
 
+# djangotemplates/djangotemplates/settings.py
+
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.0/howto/static-files/
+# https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
 
+# Add these new lines
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+
+MEDIA_ROOT=os.path.join(BASE_DIR,'static')
+
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-STATICFILES_DIRS=[
-STATIC_DIR,
- ]
 
 LOGIN_REDIRECT_URL='/afterlogin'
 
@@ -164,7 +180,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'kevinpandya18@gnu.ac.in'
-EMAIL_HOST_PASSWORD = 'KEVIN@1999'
+EMAIL_HOST_PASSWORD = 'JACK@99kevin281099'
 EMAIL_PORT = 587
 
 AXES_ENABLED = True
@@ -176,3 +192,6 @@ AXES_COOLOFF_TIME = timedelta(minutes=3)
 AXES_ONLY_USER_FAILURES = True
 
 # AXES_LOCKOUT_TEMPLATE = 'template name'
+
+
+

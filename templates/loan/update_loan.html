@@ -51,25 +51,17 @@
 </head>
 
 <br><br>
-<h3 style="text-align:center;">UPDATE POLICY</h3>
+<h3 style="text-align:center;">Update Loan</h3>
 <div>
   <form method="post" autocomplete="off" enctype="multipart/form-data" style="margin-left:200px;margin-right:200px;">
       {% csrf_token %}
         <label for="course_name">Category</label>
-      {% render_field policyForm.category class="form-control" placeholder="Life loan" %}
+      {% render_field loanForm.category class="form-control" placeholder="Life loan" %}
 
-        <label for="course_name">Policy Name</label>
-      {% render_field policyForm.policy_name class="form-control" placeholder="Jeevan Surbhi" %}
+        <label for="course_name">Loan Name</label>
+      {% render_field loanForm.loan_name class="form-control" placeholder="Jeevan Surbhi" %}
 
-     <label for="course_name">Sum Assurance</label>
-      {% render_field policyForm.sum_assurance class="form-control" placeholder="100000" %}
-
-    <label for="course_name">Premium</label>
-      {% render_field policyForm.premium class="form-control" placeholder="5000" %}
-
-          <label for="course_name">Tenure</label>
-      {% render_field policyForm.tenure class="form-control" placeholder="12" %}
-
+    
 
         
 <br><br>

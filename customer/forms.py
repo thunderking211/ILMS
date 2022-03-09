@@ -15,4 +15,3 @@ class CustomerForm(forms.ModelForm):
     class Meta:
         model=models.Customer
         fields=['address','mobile','profile_pic']
-

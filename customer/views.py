@@ -101,3 +101,4 @@ def loan(request):
 
 def maintenance(request):
     return render(request, 'customer/maintenance.html')
+

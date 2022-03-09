@@ -34,7 +34,9 @@
         <td> {{t.loan_name}}</td>
         <td> {{t.category}}</td>
         <td>{{t.creation_date}}</td>
-        <td><a class="btn btn-success btn-block" href="{% url 'apply' t.id  %}">Apply</a></td>
+        <td><a class="btn btn-success btn-block" href="{% url 'apply' t.id  %}" data-whatever="@mdo">Apply</a></td>
+       
+       
       </tr>
       {% endfor %}
     </table>
